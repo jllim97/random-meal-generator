@@ -1,0 +1,11 @@
+<div class="meal-showcase-wrapper">
+  <h3>Generate a meal for you</h3>
+
+    <div class="meal-card-item" [ngClass]="{'animated': isLoading}">
+      <app-meal-card></app-meal-card>
+
+    </div>
+  <div>
+    <button (click)="onGenerate()" class="meal-button mt-3">Generate</button>
+  </div>
+</div>
