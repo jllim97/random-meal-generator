@@ -1,44 +1,66 @@
 <div class="container mt-3 meal-detail-wrapper">
   <div class="col-6">
-    <table class="w-100">
-      <thead>
-        <tr class="bg-secondary w-100" style="text-align: center;">
-          <th colspan="4" style="color: white;">
-            <h3>Meal Details</h3>
-            </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style="text-align:center">
-          <td><h4>Name</h4></td>
-          <td>{{mealDetailModel?.name}}</td>
-        </tr>
-        <tr style="text-align:center">
-          <td><h4>Description</h4></td>
-          <td>{{mealDetailModel?.description}}</td>
-        </tr>
-        <tr style="text-align:center">
-          <td><h4>Type</h4></td>
-          <td>{{mealDetailModel?.type}}</td>
-        </tr>
-        <tr style="text-align:center">
-          <td><h4>Ingredients</h4></td>
-          <td>
-            <ul>
-              <li style="text-align:left" *ngFor="let ingredient of mealDetailModel?.ingredients">{{ingredient}}</li>
-            </ul>
-          </td>
-        </tr>
-        <tr style="text-align:center">
-          <td><h4>Video Links</h4></td>
-          <td>
-            <a [href]="link" *ngFor="let link of mealDetailModel?.videoLinks">
-              {{link}}
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <ng-container [ngTemplateOutlet]="tableTemplate"></ng-container>
   </div>
-
 </div>
+
+
+<ng-template #tableTemplate>
+  <table class="w-100">
+    <thead>
+      <tr class="bg-secondary w-100" style="text-align: center;">
+        <th colspan="4" style="color: white;">
+          <h3>Meal Details</h3>
+          </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><h4>Name</h4></td>
+        <td>{{mealDetailModel?.name}}</td>
+      </tr>
+      <tr>
+        <td><h4>Description</h4></td>
+        <td>{{mealDetailModel?.description}}</td>
+      </tr>
+      <tr >
+        <td><h4>Type</h4></td>
+        <td>{{mealDetailModel?.type}}</td>
+      </tr>
+      <tr>
+        <td><h4>Ingredients</h4></td>
+        <td>
+          <ul>
+            <li style="text-align:left" *ngFor="let ingredient of mealDetailModel?.ingredients">{{ingredient}}</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td><h4>Author</h4></td>
+        <td>
+          <a *ngIf="mealDetailModel?.author?.hyperlink;else normalAuthorTemplate" [href]="mealDetailModel?.author?.hyperlink">
+          {{mealDetailModel?.author?.name}}
+          </a>
+
+          <ng-template #normalAuthorTemplate>
+            {{mealDetailModel?.author?.name}}
+          </ng-template>
+        </td>
+      </tr>
+      <tr >
+        <td><h4>Video Links</h4></td>
+        <td>
+          <a [href]="video?.videoLink" target="_blank" *ngFor="let video of mealDetailModel?.videoLinks">
+            {{video?.videoName}}
+          </a>
+        </td>
+      </tr>
+      <tr *ngIf="mealDetailModel?.postBy">
+        <td><h4>Post By</h4></td>
+        <td>
+         {{mealDetailModel?.postBy}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ng-template>

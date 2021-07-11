@@ -8,6 +8,12 @@ import { HeaderComponent } from './core/header/header.component';
 import { MealShowcaseComponent } from './meal-showcase/meal-showcase.component';
 import { MealCardComponent } from './meal-card/meal-card.component';
 import { MealDetailComponent } from './meal-detail/meal-detail.component';
+import { LayoutModule} from '@angular/cdk/layout';
+import { NgxsModule } from '@ngxs/store';
+import { NgxsStoragePluginModule, StorageOption } from '@ngxs/storage-plugin';
+import { MealState } from './store/meal/meal.state';
+import { GlobalState } from './store/global/global.state';
+import { GLOBAL_STATE, MEAL_STATE } from './store/constants/state.constant';
 
 @NgModule({
   declarations: [
@@ -17,9 +23,16 @@ import { MealDetailComponent } from './meal-detail/meal-detail.component';
     MealDetailComponent
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     CoreModule,
-    AppRoutingModule
+    AppRoutingModule,
+    LayoutModule,
+    NgxsModule.forRoot([MealState, GlobalState]),
+    NgxsStoragePluginModule.forRoot({
+      key: [MEAL_STATE, GLOBAL_STATE],
+      storage: StorageOption.SessionStorage
+
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

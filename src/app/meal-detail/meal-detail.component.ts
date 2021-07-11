@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MealDetailData } from './mean-detail-data';
 
 @Component({
   selector: 'app-meal-detail',
@@ -7,17 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MealDetailComponent implements OnInit {
 
-  mealDetailModel: MealDetailModel = {
-    name: 'Grilled Salmon',
-    description: 'Grilled Salmon',
-    type: 'Western',
-    ingredients: [
-      'salmon 1 units',
-      'lemon 1 pcs',
-      'pepper 500 grams'
-    ],
-    videoLinks: ['#']
-  }
+  mealDetailModel: MealDetailModel = MealDetailData.GeneratedMeal;
   constructor() { }
 
   ngOnInit(): void {
@@ -28,11 +19,27 @@ export class MealDetailComponent implements OnInit {
 export interface MealDetailModel {
   name: string;
   description: string;
+  author: AuthorModel;
+  postBy?: string;
   type: string;
   ingredients: string[];
-  videoLinks: string[];
+  videoLinks: VideoLinkModel[];
 }
 
 export interface IngredientModel {
   name: string;
+}
+
+export interface AuthorModel {
+  name: string;
+  hyperlink?: string;
+}
+export interface VideoLinkModel {
+  videoName: string;
+  videoLink: string;
+}
+
+export interface HistoryMealModel {
+  id: number;
+  mealDetail: MealDetailModel;
 }
