@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { MealState } from '../store/meal/meal.state';
 import { MealDetailData } from './mean-detail-data';
 
 @Component({
@@ -9,6 +12,7 @@ import { MealDetailData } from './mean-detail-data';
 export class MealDetailComponent implements OnInit {
 
   mealDetailModel: MealDetailModel = MealDetailData.GeneratedMeal;
+  @Select(MealState.getHistoryMeals) historyMeals$: Observable<Array<HistoryMealModel>>;
   constructor() { }
 
   ngOnInit(): void {

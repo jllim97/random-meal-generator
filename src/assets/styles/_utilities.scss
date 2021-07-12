@@ -48,3 +48,20 @@
 .text-secondary {
   color: $color-secondary;
 }
+
+.row {
+  display:flex !important;
+  flex-wrap: wrap !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.text-center {
+  text-align: center !important;
+}

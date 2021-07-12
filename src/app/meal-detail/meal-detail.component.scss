@@ -1,18 +1,4 @@
-@use 'src/assets/styles/theme';
 
 .meal-detail-wrapper {
-  table {
-    border-collapse: collapse;
-  }
-  td, th {
-    border: 1px solid theme.$color-secondary;
-  }
 
-  td {
-    text-align: left;
-    padding-left: 1rem;
-  }
-  td ul {
-    padding-inline-start: 1rem !important;
-  }
 }

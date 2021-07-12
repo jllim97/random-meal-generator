@@ -14,13 +14,17 @@ import { NgxsStoragePluginModule, StorageOption } from '@ngxs/storage-plugin';
 import { MealState } from './store/meal/meal.state';
 import { GlobalState } from './store/global/global.state';
 import { GLOBAL_STATE, MEAL_STATE } from './store/constants/state.constant';
+import { HistoryMealsComponent } from './history-meals/history-meals.component';
+import { MealDetailTableComponent } from './meal-detail-table/meal-detail-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MealShowcaseComponent,
     MealCardComponent,
-    MealDetailComponent
+    MealDetailComponent,
+    HistoryMealsComponent,
+    MealDetailTableComponent
   ],
   imports: [
   BrowserModule,

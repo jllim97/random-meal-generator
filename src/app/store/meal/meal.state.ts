@@ -17,12 +17,15 @@ export interface MealStateModel {
 })
 @Injectable()
 export class MealState {
+
   @Selector()
-  getCurrentId(state: MealStateModel): number {
-    const ids: number[] = state.historyMeals.map(history => {
-      return history.id;
-    });
-    return Math.max(...ids);
+  static getSelectedMeal(state: MealStateModel) {
+    return state?.selectedMeal;
+  }
+  @Selector()
+  static getHistoryMeals(state: MealStateModel) {
+    console.log(state.historyMeals);
+    return state?.historyMeals;
   }
 
 
@@ -35,10 +38,23 @@ export class MealState {
     };
     stateContext.setState({
       ...state,
+      selectedMeal: newHistoryMeal,
       historyMeals: [
-        ...state.historyMeals,
-        newHistoryMeal
+        newHistoryMeal,
+        ...state.historyMeals
       ]
     });
+  }
+
+  getCurrentId(state: MealStateModel): number {
+    const ids: number[] = state.historyMeals.map(history => {
+      return history.id;
+    });
+    console.log(ids);
+    if(ids.length < 1) {
+      return 0;
+    }
+
+    return Math.max(...ids);
   }
 }

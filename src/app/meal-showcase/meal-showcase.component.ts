@@ -1,4 +1,8 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { AddHistoryMeal } from '../store/meal/meal.action';
+import { MealDetailData } from './../meal-detail/mean-detail-data';
+import { MealDetailModel } from 'src/app/meal-detail/meal-detail.component';
 
 @Component({
   selector: 'app-meal-showcase',
@@ -8,7 +12,7 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 export class MealShowcaseComponent implements OnInit {
 
   isLoading: boolean = false;
-  constructor(private renderer: Renderer2) { }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
   }
@@ -20,6 +24,9 @@ export class MealShowcaseComponent implements OnInit {
     setTimeout(() => {
       if(this.isLoading) {
         this.isLoading = false;
+        const mealData: MealDetailModel = {...MealDetailData.GeneratedMeal,
+        name: 'name' + Math.random()}
+        this.store.dispatch(new AddHistoryMeal(mealData));
       }
     }, 1000);
   }
